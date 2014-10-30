@@ -10,8 +10,12 @@
 <body>
 
 <%= render 'layouts/header' %>
-
 <div class="container">
+
+    <% flash.each do |name, msg| %>
+     <%= content_tag(:div, msg, class: "alert alert-#{name}")  %>
+     <% end %>
+
     <%= yield %>
 </div>
     
@@ -20,7 +24,7 @@
 
 <div class="panel panel-default">
 
-  <div class="panel-footer">Incentru.com © 2014</div>
+  <div class="panel-footer">© 2014 Incentru.com </div>
 </div>
 
 </html>

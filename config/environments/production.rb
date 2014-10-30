@@ -79,4 +79,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  #Required for Devise setup and runing app through Heroku  
+  config.action_mailer.default_url_options = { host: 'incentru.com' }
 end
