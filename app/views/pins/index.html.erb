@@ -2,15 +2,6 @@
 <% if user_signed_in? %>
   <%= link_to 'New Listing', new_pin_path %>
 
-<% end %>
-<table>
-  <thead>
-  <tr>
-      
-    </tr>
-  </thead>
-
-  <tbody>
     <div id="pins">
       <div class="box">
           <% @pins.each do |pin| %>
@@ -31,11 +22,4 @@
       </div>
     <% end %>
   </div>
-
-
-  </tbody>
-</table>
-
-<br>
-
-
+<% end %>
