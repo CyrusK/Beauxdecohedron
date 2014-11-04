@@ -1,12 +1,13 @@
 <h1>Listings</h1>
     <% if user_signed_in? %>
-      <%= link_to 'New Listing', new_pin_path %>
+      <%= link_to 'Add Listing', new_pin_path, class: "btn btn-success btn-lg" %>
+    <% end %>
  
           <div id="pins" class="transitions-enabled">
             <% @pins.each do |pin| %>
               <div class="box panel panel-default">
                 <div class="panel-body">
-                  <%= image_tag pin.image.url(:medium) %>
+                  <%= link_to (image_tag pin.image.url(:medium)), pin %>
                   <strong>Manufacturer:</strong>           
                   <%= pin.manufacturer %>
                   <p></p>
@@ -18,15 +19,14 @@
                   <p><a href="#" class="btn btn-default" role="button">Contact Us</a></p>
                   <%= link_to 'Show', pin %>
                   <% if pin.user == current_user %>
-                    <div class="actions">
                       <%= link_to 'Edit', edit_pin_path(pin) %>
                       <%= link_to 'Delete', pin, method: :delete, data: { confirm: 'Are you sure?' } %>
-                    </div>
+
                   <% end %>
               </div>
             </div>
 
           <% end %>
         </div>
-    <% end %>
+    
       
