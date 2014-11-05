@@ -19,7 +19,6 @@
                   <%= pin.description %>
                   <p></p>
                   <center><a href="#" class="btn btn-default" role="button">Contact Us</a></center>
-                  <%= link_to 'Show', pin %>
                   <% if pin.user == current_user %>
                       <%= link_to 'Edit', edit_pin_path(pin) %>
                       <%= link_to 'Delete', pin, method: :delete, data: { confirm: 'Are you sure?' } %>
