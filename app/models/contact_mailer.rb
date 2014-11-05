@@ -9,6 +9,6 @@ class ContactMailer < ActionMailer::Base
     @phone = phone
     @country = country
     
-    mail(from: email, subject: 'Contact Request', to: 'cskhajvandi@gmail.com')
+    mail(from: email, subject: 'Contact Request', to: 'info@incentru.com')
   end
 end
