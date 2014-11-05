@@ -1,6 +1,9 @@
-<h1>Listings</h1>
+<%= render 'pages/home' unless user_signed_in? %>
+
+<h3>Listings</h3>
     <% if user_signed_in? %>
-      <%= link_to 'Add Listing', new_pin_path, class: "btn btn-success btn-lg" %>
+      <%= link_to '+Add Listing', new_pin_path, class: "btn btn-success btn-lg" %>
+      <%= link_to 'Buy Request', contact_path, class: "btn btn-warning btn-lg" %>
     <% end %>
  
           <div id="pins" class="transitions-enabled">
