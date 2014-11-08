@@ -2,11 +2,11 @@
 require File.expand_path('../application', __FILE__)
 
 ActionMailer::Base.smtp_settings = {
-  :user_name => 'info@monisr.com',
-  :password => '123321',
-  :domain => '122.10.90.37',
-  :address => 'smtp.122.10.90.37',
-  :port => 2525,
+  :user_name => 'info@incentru.com',
+  :password => '123321!',
+  :domain => 'www.incentru.com',
+  :address => 'smtp.104.128.190.18',
+  :port => 2096,
   :authentication => :plain,
   :enable_starttls_auto => true
 }
