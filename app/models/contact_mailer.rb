@@ -10,5 +10,7 @@ class ContactMailer < ActionMailer::Base
     @country = country
     
     mail(from: email, subject: 'Contact Request', to: 'info@incentru.com')
+
+      validates :email, presence: true
   end
 end
