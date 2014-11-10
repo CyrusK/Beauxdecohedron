@@ -11,6 +11,5 @@ class ContactMailer < ActionMailer::Base
     
     mail(from: email, subject: 'Contact Request', to: 'info@incentru.com')
 
-      validates :email, presence: true
   end
 end
