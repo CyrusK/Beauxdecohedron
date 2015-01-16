@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root "pins#index"
   get "about" => "pages#about" #creates about_path
   get "contact" => "pages#contact" #creates contact_path
+  get "auction" => "pages#auction" #creates auction_path
   match '/send_mail', to: 'contact#send_mail', via: 'post'
   match '/contact', to: 'contact#show', via: 'get'
 

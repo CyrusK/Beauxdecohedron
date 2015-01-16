@@ -11,6 +11,8 @@ class PagesController < ApplicationController
         end
   end
 
+  def auction
+  end
 
     class ContactsController < ApplicationController
         def new
