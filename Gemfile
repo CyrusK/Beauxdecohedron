@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.1.2'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 
 # Use SCSS for stylesheets
@@ -16,7 +15,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '2.5.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -31,7 +30,7 @@ gem 'jquery-turbolinks'
 
 gem 'masonry-rails', '~> 0.2.0'
 
-gem 'mail_form'
+gem 'mail_form', '1.5.0'
 
 gem 'simple_form', '~>3.0'
 
@@ -39,20 +38,17 @@ gem 'aws-sdk', '~>1.20.0'
 
 gem  'will_paginate', '~> 3.0.5'
 
-gem 'will_paginate-bootstrap'
+gem 'will_paginate-bootstrap', '1.0.1'
 
-
-gem 'sdoc', '~> 0.4.0',          group: :doc
-
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
-    gem 'sqlite3'
-    gem 'spring'   
+  gem 'sqlite3'
+  gem 'spring'
 end
 
 group :production do
-    gem 'pg'
-    gem 'rails_12factor'
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
