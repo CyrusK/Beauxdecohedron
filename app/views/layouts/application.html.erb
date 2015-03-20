@@ -8,24 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+  <div id="body-interior">
+    <%= render 'layouts/header' %>
+    <div class="container">
 
-<%= render 'layouts/header' %>
-<div class="container">
 
+      <% flash.each do |name, msg| %>
+        <%= content_tag(:div, msg, class: "alert alert-info") %>
+      <% end %>
 
-    <% flash.each do |name, msg| %>
-     <%= content_tag(:div, msg, class: "alert alert-info") %>
-    <% end %>
+      <%= yield %>
+    </div>
 
-    <%= yield %>
-</div>
-    
-
+    <%= render 'shared/footer' %>
+  </div>
 </body>
-
-<div class="panel panel-default">
-
-  <div class="panel-footer">© 2014 Incentru.com </div>
-</div>
-
 </html>
