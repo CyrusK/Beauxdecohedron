@@ -36,7 +36,7 @@ gem 'simple_form', '~>3.0'
 
 gem 'aws-sdk', '~>1.20.0'
 
-gem  'will_paginate', '~> 3.0.5'
+gem 'will_paginate', '~> 3.0.5'
 
 gem 'will_paginate-bootstrap', '1.0.1'
 
@@ -45,6 +45,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   gem 'sqlite3'
   gem 'spring'
+end
+
+group :development do
+  gem 'annotate'
 end
 
 group :production do
