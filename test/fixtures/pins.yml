@@ -29,6 +29,11 @@
 #  image5_content_type :string(255)
 #  image5_file_size    :integer
 #  image5_updated_at   :datetime
+#  is_auction          :boolean
+#  auction_start_at    :datetime
+#  auction_end_at      :datetime
+#  reserve             :float
+#  minimum_bid         :float
 #
 # Indexes
 #

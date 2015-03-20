@@ -1,6 +1,9 @@
 
 <div class="panel panel-default">
-  <div class="panel-heading center">
+  <div class="panel-heading <%= 'center' if !@pin.is_auction %>">
+    <% if @pin.is_auction %>
+      <div class="col-md-6">
+    <% end %>
     <div class="jcarousel-wrapper">
       <div class="jcarousel">
         <ul>
@@ -45,6 +48,26 @@
         <a href="#" class="jcarousel-control-next">&rsaquo;</a>
       <% end %>
     </div>
+    <% if @pin.is_auction %>
+      </div>
+      <div class="col-md-6">
+        <h3>Auction Details</h3>
+        <% if @pin.is_auction_started? && ! %>
+          <p>This auction is live! It will end at <%= @pin.auction_end_at.strftime("%B %d, %Y, %H:%M") %>.</p>
+        <% elsif @pin.is_auction_ended? %>
+          <p>This auction ended at <%= @pin.auction_end_at.strftime("%B %d, %Y, %H:%M") %>.</p>
+        <% elsif !@pin.is_auction_started? %>
+          <p>This auction opens at <%= @pin.auction_start_at.strftime("%B %d, %Y, %H:%M") %>.</p>
+        <% end %>
+        <% if @pin.minimum_bid && !@pin.is_auction_ended? %>
+          <p>Minimum bid: $<%= number_with_precision(@pin.minimum_bid, precision: 2) %></p>
+        <% end %>
+        <% if @pin.reserve && !@pin.is_auction_ended? %>
+          <p>Reserve price: $<%= number_with_precision(@pin.reserve, precision: 2) %></p>
+        <% end %>
+      </div>
+      <div class="clear"></div>
+    <% end %>
   </div>
   <div class="panel-body">
     <p>

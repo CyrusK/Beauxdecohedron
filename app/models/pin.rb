@@ -29,6 +29,11 @@
 #  image5_content_type :string(255)
 #  image5_file_size    :integer
 #  image5_updated_at   :datetime
+#  is_auction          :boolean
+#  auction_start_at    :datetime
+#  auction_end_at      :datetime
+#  reserve             :float
+#  minimum_bid         :float
 #
 # Indexes
 #
@@ -51,6 +56,18 @@ class Pin < ActiveRecord::Base
 
   validates :image, presence: true
   validates :description, presence: true
+
+  def time_to_auction
+
+  end
+
+  def is_auction_started?
+    DateTime.now.to_f - self.auction_start_at.to_f > 0
+  end
+
+  def is_auction_ended?
+    DateTime.now.to_f - self.auction_end_at.to_f > 0
+  end
 
   def single_image_only?
     !self.image2_file_name &&

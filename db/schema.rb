@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320013812) do
+ActiveRecord::Schema.define(version: 20150320021740) do
 
   create_table "pins", force: true do |t|
     t.string   "description"
@@ -40,6 +40,11 @@ ActiveRecord::Schema.define(version: 20150320013812) do
     t.string   "image5_content_type"
     t.integer  "image5_file_size"
     t.datetime "image5_updated_at"
+    t.boolean  "is_auction"
+    t.datetime "auction_start_at"
+    t.datetime "auction_end_at"
+    t.float    "reserve"
+    t.float    "minimum_bid"
   end
 
   add_index "pins", ["user_id"], name: "index_pins_on_user_id"
