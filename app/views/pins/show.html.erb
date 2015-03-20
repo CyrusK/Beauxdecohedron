@@ -1,27 +1,71 @@
 
-    <div class="panel panel-default">
-        <div class="panel-heading center">
-              <p></p>
-              <center><%= image_tag @pin.image.url(:medium) %></center>
-              <p></p>
-        </div>
-          <div class="panel-body">
-              <strong>Manufacturer:</strong>
-              <%= @pin.manufacturer %>
-            <p><strong>Model:</strong>
-                <%= @pin.model %>
-            </p>
-            <p><strong>Description:</strong>
-              <%= @pin.description %>
-            </p>
-          </div>
+<div class="panel panel-default">
+  <div class="panel-heading center">
+    <div class="jcarousel-wrapper">
+      <div class="jcarousel">
+        <ul>
+          <li>
+            <div class="jcarousel-image-container">
+              <%= image_tag @pin.image.url(:medium) %>
+            </div>
+          </li>
+          <% if @pin.image2_file_name %>
+            <li>
+              <div class="jcarousel-image-container">
+                <%= image_tag @pin.image2.url(:medium) %>
+              </div>
+            </li>
+          <% end %>
+          <% if @pin.image3_file_name %>
+            <li>
+              <div class="jcarousel-image-container">
+                <%= image_tag @pin.image3.url(:medium) %>
+              </div>
+            </li>
+          <% end %>
+          <% if @pin.image4_file_name %>
+            <li>
+              <div class="jcarousel-image-container">
+                <%= image_tag @pin.image4.url(:medium) %>
+              </div>
+            </li>
+          <% end %>
+          <% if @pin.image5_file_name %>
+            <li>
+              <div class="jcarousel-image-container">
+                <%= image_tag @pin.image5.url(:medium) %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <% if !@pin.single_image_only? %>
+        <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+        <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+      <% end %>
     </div>
-        <center><%= link_to 'Contact Us', {:controller => "contact", :action => "show", :pin_id => @pin.id}, {class: "btn btn-default btn-lg"} %></center>
+  </div>
+  <div class="panel-body">
+    <p>
+      <strong>Manufacturer:</strong>
+      <%= @pin.manufacturer %>
+    </p>
+    <p>
+      <strong>Model:</strong>
+      <%= @pin.model %>
+    </p>
+    <p>
+      <strong>Description:</strong>
+      <%= @pin.description %>
+    </p>
+  </div>
+</div>
+<center><%= link_to 'Contact Us', {:controller => "contact", :action => "show", :pin_id => @pin.id}, {class: "btn btn-default btn-lg"} %></center>
 
 <br><br/>
 
-
 <% if @pin.user == current_user %>
-<%= link_to 'Edit', edit_pin_path(@pin) %> |
+  <%= link_to 'Edit', edit_pin_path(@pin) %> |
 <% end %>
 <%= link_to 'Back', pins_path %>

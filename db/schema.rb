@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103235303) do
+ActiveRecord::Schema.define(version: 20150320013812) do
 
   create_table "pins", force: true do |t|
     t.string   "description"
@@ -24,6 +24,22 @@ ActiveRecord::Schema.define(version: 20141103235303) do
     t.datetime "image_updated_at"
     t.string   "manufacturer"
     t.string   "model"
+    t.string   "image2_file_name"
+    t.string   "image2_content_type"
+    t.integer  "image2_file_size"
+    t.datetime "image2_updated_at"
+    t.string   "image3_file_name"
+    t.string   "image3_content_type"
+    t.integer  "image3_file_size"
+    t.datetime "image3_updated_at"
+    t.string   "image4_file_name"
+    t.string   "image4_content_type"
+    t.integer  "image4_file_size"
+    t.datetime "image4_updated_at"
+    t.string   "image5_file_name"
+    t.string   "image5_content_type"
+    t.integer  "image5_file_size"
+    t.datetime "image5_updated_at"
   end
 
   add_index "pins", ["user_id"], name: "index_pins_on_user_id"
