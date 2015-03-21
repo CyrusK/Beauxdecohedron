@@ -13,22 +13,22 @@
        <%= link_to "Incentru", root_path, class: "navbar-brand" %>
      </div>
 
-     <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to 'Home', root_path %></li>
-          <li><%= link_to 'About', about_path %></li>
-            <li><%= link_to 'Contact Us', contact_path %></li>
-            <li><%= link_to 'Auctions', auction_path %></li>
-          
-          <% if user_signed_in? %>
-              <li><%= link_to 'New Listing', new_pin_path %></li>
-              <li><%= link_to "Account Settings", edit_user_registration_path %></li>
-              <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
-            <% else %>
-          <li><%= link_to "Log In", new_user_session_path %></li>
-          <% end %>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'Home', root_path %></li>
+        <li><%= link_to 'About', about_path %></li>
+        <li><%= link_to 'Contact Us', contact_path %></li>
+
+        <% if user_signed_in? %>
+          <li><%= link_to 'New Listing', new_pin_path %></li>
+          <li><%= link_to "Account Settings", edit_user_registration_path %></li>
+          <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+         <li><%= link_to "Register", new_user_registration_path %></li>
+         <li><%= link_to "Log In", new_user_session_path %></li>
+      <% end %>
       
-            </ul>
+      </ul>
     </div>
   </div><!-- /.navbar-collapse -->
 </nav>
