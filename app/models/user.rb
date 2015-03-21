@@ -27,4 +27,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :pins
+
+  def is_admin?
+    Rails.env.development? ||
+        (self.id == 1 && self.email == "cskhajvandi@gmail.com") ||
+        (self.id == 2 && self.email == "pickhardt@gmail.com")
+  end
 end
