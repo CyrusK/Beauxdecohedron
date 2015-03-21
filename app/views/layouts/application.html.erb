@@ -6,13 +6,12 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= render 'shared/user_info' %>
 </head>
 <body>
   <div id="body-interior">
-    <%= render 'layouts/header' %>
+    <%= render 'shared/header' %>
     <div class="container">
-
-
       <% flash.each do |name, msg| %>
         <%= content_tag(:div, msg, class: "alert alert-info") %>
       <% end %>

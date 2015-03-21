@@ -33,7 +33,7 @@
 #  auction_start_at    :datetime
 #  auction_end_at      :datetime
 #  reserve             :float
-#  minimum_bid         :float
+#  quantity            :integer          default(1)
 #
 # Indexes
 #

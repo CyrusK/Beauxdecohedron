@@ -33,7 +33,7 @@
 #  auction_start_at    :datetime
 #  auction_end_at      :datetime
 #  reserve             :float
-#  minimum_bid         :float
+#  quantity            :integer          default(1)
 #
 # Indexes
 #
@@ -56,6 +56,60 @@ class Pin < ActiveRecord::Base
 
   validates :image, presence: true
   validates :description, presence: true
+
+  has_many :users
+  has_many :bids
+
+  def active_bids
+    self.bids.where(is_cancelled: false).order("price DESC")
+  end
+
+  def cancelled_bids
+    self.bids.where(is_cancelled: true).order("price DESC")
+  end
+
+  def bid_increment
+    1.00
+  end
+
+  def bid_for(user)
+    if user.nil?
+      return nil
+    end
+    self.bids.where(is_cancelled: false, user_id: user.id).first
+  end
+
+  def is_multi?
+    !self.quantity.nil? && self.quantity > 1
+  end
+
+  def minimum_bid
+    bids_meet_reserve = false
+    quantity_remaining = self.quantity
+    lowest_price = self.reserve.nil? ? 1.00 : self.reserve
+    self.active_bids.order("price DESC").each do |bid|
+      if bid.price < lowest_price
+        next
+      end
+
+      if bid.price >= self.reserve
+        bids_meet_reserve = true
+      end
+
+      lowest_price = bid.price
+      quantity_remaining -= bid.quantity
+      if quantity_remaining < 0
+        quantity_remaining = 0
+        break
+      end
+    end
+
+    if bids_meet_reserve && quantity_remaining <= 0
+      return lowest_price + bid_increment
+    else
+      return self.reserve
+    end
+  end
 
   def time_to_auction
 

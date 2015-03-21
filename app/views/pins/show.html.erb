@@ -1,3 +1,15 @@
+<script type="text/javascript">
+  var incentru = incentru || {};
+  incentru.pageName = "Pin";
+  incentru.pageData = incentru.pageData || {};
+  incentru.pageData.minimumBid = <%= @pin.minimum_bid %>;
+  <% if @pin.is_multi? %>
+    incentru.pageData.maxQuantity = <%= @pin.quantity %>;
+  <% end %>
+  incentru.pageData.pinId = <%= @pin.id %>;
+
+  $(_.bind(incentru.PinPage.onPageLoad, incentru.PinPage));
+</script>
 
 <div class="panel panel-default">
   <div class="panel-heading <%= 'center' if !@pin.is_auction %>">
@@ -52,41 +64,70 @@
       </div>
       <div class="col-md-6">
         <h3>Auction Details</h3>
-        <% if @pin.is_auction_started? && ! %>
-          <p>This auction is live! It will end at <%= @pin.auction_end_at.strftime("%B %d, %Y, %H:%M") %>.</p>
+        <% if @pin.is_auction_started? && !@pin.is_auction_ended? %>
+          <p>
+            This auction is live! It will end at <%= @pin.auction_end_at.strftime("%B %d, %Y, %H:%M %Z") %>.
+          </p>
+          <% if @existing_bid %>
+          <p>
+            <strong>You have bid on this:</strong> $<%= number_with_precision(@existing_bid.price, precision: 2) %>
+            <% if @pin.is_multi? %>
+              / unit for <%= @existing_bid.quantity %> units.
+            <% else %>
+              for the item.
+            <% end %>
+          </p>
+          <% end %>
+
+          <form id="bid-form">
+            <p>
+              <% if @existing_bid.nil? %>
+                If interested,
+              <% else %>
+                If you would like to change your bid to something else,
+              <% end %>
+              place a bid of at least $<%= number_with_precision(@pin.minimum_bid, precision: 2) %> USD with the form below.
+            </p>
+            <p>
+              Price <%= ' per unit' if @pin.is_multi? %>:<br />
+              <input type="text" name="price" value="<%= number_with_precision(@pin.minimum_bid, precision: 2) %>" />
+            </p>
+            <% if @pin.is_multi? %>
+              <p>
+                Quantity requested (max <%= @pin.quantity %>):<br />
+                <input type="text" name="quantity" value="1" />
+              </p>
+              <p>
+                (The full bid will be $<span class="effective-price"><%= number_with_precision(@pin.minimum_bid, precision: 2) %></span> USD)
+              </p>
+            <% end %>
+            <button class="btn btn-primary btn-lg">Place Bid</button>
+            <div id="bid-error" class="error"></div>
+            <div id="bid-success" class="success"></div>
+          </form>
         <% elsif @pin.is_auction_ended? %>
-          <p>This auction ended at <%= @pin.auction_end_at.strftime("%B %d, %Y, %H:%M") %>.</p>
+          <p>
+            This auction ended at <%= @pin.auction_end_at.strftime("%B %d, %Y, %H:%M %Z") %>.
+          </p>
+          <p>
+            We will get in touch with those who placed bids.
+          </p>
         <% elsif !@pin.is_auction_started? %>
-          <p>This auction opens at <%= @pin.auction_start_at.strftime("%B %d, %Y, %H:%M") %>.</p>
-        <% end %>
-        <% if @pin.minimum_bid && !@pin.is_auction_ended? %>
-          <p>Minimum bid: $<%= number_with_precision(@pin.minimum_bid, precision: 2) %></p>
-        <% end %>
-        <% if @pin.reserve && !@pin.is_auction_ended? %>
-          <p>Reserve price: $<%= number_with_precision(@pin.reserve, precision: 2) %></p>
+          <p>
+            This auction opens at <%= @pin.auction_start_at.strftime("%B %d, %Y, %H:%M %Z") %>.
+          </p>
         <% end %>
       </div>
       <div class="clear"></div>
     <% end %>
   </div>
   <div class="panel-body">
-    <p>
-      <strong>Manufacturer:</strong>
-      <%= @pin.manufacturer %>
-    </p>
-    <p>
-      <strong>Model:</strong>
-      <%= @pin.model %>
-    </p>
-    <p>
-      <strong>Description:</strong>
-      <%= @pin.description %>
-    </p>
+    <%= render partial: 'pins/details', pin: @pin %>
   </div>
 </div>
-<center><%= link_to 'Contact Us', {:controller => "contact", :action => "show", :pin_id => @pin.id}, {class: "btn btn-default btn-lg"} %></center>
+<center><%= link_to 'Contact Us With Questions', {:controller => "contact", :action => "show", :pin_id => @pin.id}, {class: "btn btn-default btn-lg"} %></center>
 
-<br><br/>
+<br /><br />
 
 <% if @pin.user == current_user %>
   <%= link_to 'Edit', edit_pin_path(@pin) %> |

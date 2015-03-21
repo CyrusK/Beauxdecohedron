@@ -1,0 +1,18 @@
+<p>
+  <strong>Manufacturer:</strong>
+  <%= @pin.manufacturer %>
+</p>
+<p>
+  <strong>Model:</strong>
+  <%= @pin.model %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @pin.description %>
+</p>
+<% if @pin.is_multi? %>
+  <p>
+    <strong>Quantity:</strong>
+    <%= @pin.quantity %>
+  </p>
+<% end %>

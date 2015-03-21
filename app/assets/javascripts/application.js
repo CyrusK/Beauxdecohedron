@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.jcarousel
+//= require underscore
 //= require bootstrap
 //= require jquery.turbolinks
 //= require turbolinks

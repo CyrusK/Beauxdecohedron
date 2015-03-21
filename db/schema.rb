@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320021740) do
+ActiveRecord::Schema.define(version: 20150321024517) do
+
+  create_table "bids", force: true do |t|
+    t.integer  "pin_id",                       null: false
+    t.integer  "user_id",                      null: false
+    t.integer  "quantity",     default: 1,     null: false
+    t.float    "price",                        null: false
+    t.boolean  "is_cancelled", default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pins", force: true do |t|
     t.string   "description"
@@ -44,7 +54,7 @@ ActiveRecord::Schema.define(version: 20150320021740) do
     t.datetime "auction_start_at"
     t.datetime "auction_end_at"
     t.float    "reserve"
-    t.float    "minimum_bid"
+    t.integer  "quantity",            default: 1
   end
 
   add_index "pins", ["user_id"], name: "index_pins_on_user_id"

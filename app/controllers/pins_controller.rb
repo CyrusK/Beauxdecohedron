@@ -1,5 +1,5 @@
 class PinsController < ApplicationController
-  before_action :set_pin, only: [:show, :edit, :update, :destroy]
+  before_action :set_pin, only: [:show, :edit, :update, :destroy, :bid]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
@@ -7,7 +7,24 @@ class PinsController < ApplicationController
     @pins = Pin.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 9)
   end
 
+  def bid
+    Bid.where(user_id: current_user.id, pin_id: @pin.id).each do |bid|
+      bid.cancel!
+    end
+
+    bid = Bid.new
+    bid.user = current_user
+    bid.pin = @pin
+    bid.price = params[:price].to_f
+    bid.quantity = params[:quantity] ? params[:quantity].to_i : 1
+    bid.save
+    render json: {
+        success: true
+    }
+  end
+
   def show
+    @existing_bid = @pin.bid_for(current_user)
   end
 
   def new
