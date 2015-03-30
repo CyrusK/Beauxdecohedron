@@ -14,6 +14,9 @@ class PagesController < ApplicationController
   def auction
   end
 
+  def terms
+  end
+
     class ContactsController < ApplicationController
         def new
           @contact = Contact.new

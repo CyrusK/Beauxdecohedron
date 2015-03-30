@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "about" => "pages#about" #creates about_path
   get "contact" => "pages#contact" #creates contact_path
   get "auction" => "pages#auction" #creates auction_path
+  get "terms" => "pages#terms" #creates terms_path
   post 'send_mail', to: 'contact#send_mail'
   get 'contact', to: 'contact#show'
 
