@@ -66,9 +66,11 @@
         <h3>Auction Details</h3>
         <% if @pin.is_auction_started? && !@pin.is_auction_ended? %>
           <p>
-            This auction is live! It will end at <%= @pin.auction_end_at.strftime("%B %d, %Y, %H:%M %Z") %>.
+            <h4>This auction is live!</h4> 
+              <h4>Auction ends on <%= @pin.auction_end_at.strftime("%B %d, %Y, %H:%M %Z") %>.</h4>
           </p>
           <% if @existing_bid %>
+          <br>
           <p>
             <strong>You have bid on this:</strong> $<%= number_with_precision(@existing_bid.price, precision: 2) %>
             <% if @pin.is_multi? %>
@@ -77,6 +79,7 @@
               for the item.
             <% end %>
           </p>
+          <br/>
           <% end %>
 
           <form id="bid-form">
@@ -104,6 +107,7 @@
             <button class="btn btn-primary btn-lg">Place Bid</button>
             <div id="bid-error" class="error"></div>
             <div id="bid-success" class="success"></div>
+            <h6>*By placing a bid you agree to Incentru's Terms & Conditions.</h6>
           </form>
         <% elsif @pin.is_auction_ended? %>
           <p>
