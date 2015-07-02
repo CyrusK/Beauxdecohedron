@@ -12,6 +12,8 @@
     <div class="container-content">
       <div class="container">
         <%= form_tag(send_mail_path) do %>
+          <input type="hidden" name="pin_id" value="<%= params[:pin_id] %>" />
+
           <div class="form-group">
             <%= label_tag 'name', 'Name' %>
             <%= text_field_tag 'name', nil, class: 'form-control', placeholder: 'Your First Name' %>
